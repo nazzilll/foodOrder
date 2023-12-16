@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "711100618941",
+    "firebase_url": "https://prakmobile-4bee0-default-rtdb.firebaseio.com",
+    "project_id": "prakmobile-4bee0",
+    "storage_bucket": "prakmobile-4bee0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:711100618941:android:00176c5d590c367e3dffd4",
+        "android_client_info": {
+          "package_name": "nazzil.dev.flutter_eatit_new"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAeABX2pWzzvMaPR5cGpWwdaSgECrss7-4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
