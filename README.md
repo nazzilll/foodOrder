@@ -1,6 +1,14 @@
 # Food Order App
 
 sebuah aplikasi Flutter yang digunakan untuk memesan makanan dari restoran-restoran tertentu.
+## Penjelasan Folder
+- Firebase: Folder ini berisi file-file terkait dengan integrasi dan interaksi aplikasi dengan Firebase, seperti pengaturan Firebase, referensi database, atau pengelolaan otentikasi pengguna.
+- Model: Folder ini berisi definisi kelas atau model data yang digunakan dalam aplikasi untuk merepresentasikan entitas seperti makanan, kategori, keranjang belanja, dll.
+- State: Folder ini berisi file-file terkait dengan manajemen state dalam aplikasi, seperti controller untuk manajemen state keranjang belanja, kategori yang dipilih, restoran yang dipilih, dsb.
+- Utils: Folder ini berisi utilitas atau fungsi bantuan yang dapat digunakan secara global dalam aplikasi, seperti konstanta, format angka, atau fungsi-fungsi umum lainnya.
+- View_Model: Folder ini berisi definisi view model yang digunakan untuk mengelola logika tampilan (UI) aplikasi, seperti mengambil data dari database atau mengubah state aplikasi.
+- Widget: Folder ini berisi komponen-komponen widget yang dapat digunakan kembali dalam berbagai bagian aplikasi, seperti widget untuk menampilkan gambar dari URL, atau widget untuk menampilkan informasi keranjang belanja.
+- Screen: Folder ini berisi file-file terkait dengan tampilan (UI) aplikasi, seperti halaman-halaman (screen) yang digunakan dalam navigasi aplikasi seperti halaman keranjang belanja, halaman kategori, halaman detail makanan, dll.
 
 ## Penerapan Asynchronous Programming
 ### 1. Firebase Operations:
