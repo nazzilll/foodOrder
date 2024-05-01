@@ -76,7 +76,7 @@ class FoodDetailScreen extends StatelessWidget {
                             title: Text(
                               addonText,
                               style: GoogleFonts.jetBrainsMono(
-                                color: Colors.blueGrey,
+                                //color: Colors.blueGrey,
                                 fontSize: 20,
                                 fontWeight: FontWeight.w900,
                               ),

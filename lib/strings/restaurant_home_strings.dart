@@ -5,3 +5,4 @@ final restaurantListText ='Restaurant';
 final profileText = 'Profile';
 final loginText = 'Login';
 final logoutText= 'Logout';
+final modeText= 'Change Theme';

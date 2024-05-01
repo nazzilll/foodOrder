@@ -21,10 +21,10 @@ class HomeMenuWidget extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Icon(Icons.home,color:Colors.white),
+            Icon(Icons.home,color:Colors.red.shade900),
             SizedBox(width: 10,),
             Text(homeText,style: GoogleFonts.jetBrainsMono(fontSize: 18,
-                color: Colors.white,fontWeight: FontWeight.w900),)
+                color: Colors.red.shade900,fontWeight: FontWeight.w900),)
           ],
         ),
       ),

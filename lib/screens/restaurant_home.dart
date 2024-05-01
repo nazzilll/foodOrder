@@ -35,7 +35,7 @@ class RestaurantHome extends StatelessWidget {
           borderRadius: 24,
           showShadow: true,
           angle: 0.0,
-          menuBackgroundColor: Colors.grey[300]!,
+          // menuBackgroundColor: Colors.grey[900]!,
           slideWidth: MediaQuery.of(context).size.width * 0.65,
           openCurve: Curves.bounceInOut,
           closeCurve: Curves.ease,

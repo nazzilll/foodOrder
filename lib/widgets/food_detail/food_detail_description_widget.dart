@@ -38,7 +38,7 @@ class FoodDetailDescriptionWidget extends StatelessWidget {
             Text(
               '${foodListStateController.selectedFood.value.description}',
               style: GoogleFonts.jetBrainsMono(
-                color: Colors.blueGrey,
+                //color: Colors.blueGrey,
                 fontSize: 14,
               ),
             ),

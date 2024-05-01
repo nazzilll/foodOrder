@@ -34,7 +34,7 @@ class FoodDetailSizeWidget extends StatelessWidget {
                 title: Text(
                   sizeText,
                   style: GoogleFonts.jetBrainsMono(
-                    color: Colors.blueGrey,
+                    //color: Colors.blueGrey,
                     fontSize: 20,
                     fontWeight: FontWeight.w900,
                   ),

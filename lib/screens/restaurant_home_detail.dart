@@ -33,12 +33,13 @@ class RestaurantHomeDetail extends StatelessWidget {
         title: Text(
           '${mainStateController.selectedRestaurant.value.name}',
           style: GoogleFonts.jetBrainsMono(
-              color: Colors.black, fontWeight: FontWeight.w900),
+              // color: Colors.black,
+              fontWeight: FontWeight.w900),
         ),
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.black,
+        backgroundColor: Colors.red.shade900,
+        // foregroundColor: Colors.black,
         elevation: 10,
-        iconTheme: IconThemeData(color: Colors.black),
+        // iconTheme: IconThemeData(color: Colors.black),
         leading: InkWell(
           child: Icon(Icons.view_headline),
           onTap: () => zoomDrawerController.toggle!(),

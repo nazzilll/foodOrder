@@ -1,5 +1,8 @@
 import 'dart:convert';
-
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_eatit_new/model/change_theme_button_widget.dart';
+import 'package:provider/provider.dart';
 import 'package:auto_animated/auto_animated.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -20,6 +23,7 @@ import 'package:flutter_eatit_new/widgets/main/main_widgets.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_eatit_new/provider/theme_mode.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -38,17 +42,18 @@ class MyApp extends StatelessWidget {
   MyApp({required this.app, this.user});
 
   @override
-  Widget build(BuildContext context) {
-    return GetMaterialApp(
-      title: 'Flutter Demo',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: Login(app: app,),
-// Pass 'app' parameter to MyHomePage
-    );
-  }
+  Widget build(BuildContext context) => ChangeNotifierProvider(
+      create: (context) => ThemeProvider(),
+      builder: (context, _) {
+        final themeProvider = Provider.of<ThemeProvider>(context);
+        return GetMaterialApp(
+          title: "",
+          themeMode: themeProvider.themeMode,
+          theme: MyThemes.lightTheme,
+          darkTheme: MyThemes.darkTheme,
+          home: Login(app: app),
+        );
+      });
 }
 
 class MyHomePage extends StatefulWidget {
@@ -95,10 +100,13 @@ class MyHomePageState extends State<MyHomePage> {
           restaurantText,
           style: GoogleFonts.jetBrainsMono(
             fontWeight: FontWeight.w900,
-            color: Colors.black,
+            // color: Colors.black,
           ),
         ),
-        backgroundColor: Colors.white,
+        actions: [
+          ChangeThemeButtonWidget(),
+        ],
+        backgroundColor: Colors.red.shade900,
         elevation: 10,
 
           ),

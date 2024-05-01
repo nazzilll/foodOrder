@@ -41,7 +41,8 @@ class MostPopularWidget extends StatelessWidget {
                   style: GoogleFonts.jetBrainsMono(
                       fontWeight: FontWeight.w900,
                       fontSize: 24,
-                      color: Colors.black45),
+                      //color: Colors.black45
+                  ),
 
                 ),
                 Expanded(child: LiveList(

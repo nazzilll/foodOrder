@@ -24,7 +24,7 @@ class MenuWidget extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Icon(icon, color: Colors.white),
+            Icon(icon, color: Colors.red.shade900),
             SizedBox(
               width: 10,
             ),
@@ -32,7 +32,7 @@ class MenuWidget extends StatelessWidget {
               menuName,
               style: GoogleFonts.jetBrainsMono(
                 fontSize: 18,
-                color: Colors.white,
+                color: Colors.red.shade900,
                 fontWeight: FontWeight.w900,
               ),
             )

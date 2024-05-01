@@ -28,7 +28,7 @@ class FoodDetailNameWidget extends StatelessWidget {
             Text(
               '${foodListStateController.selectedFood.value.name}',
               style: GoogleFonts.jetBrainsMono(
-                  color: Colors.blueGrey,
+                  //color: Colors.blueGrey,
                   fontSize: 20,
                   fontWeight: FontWeight.w900),
             ),
@@ -41,7 +41,7 @@ class FoodDetailNameWidget extends StatelessWidget {
                 Text(
                   '\$${foodListStateController.selectedFood.value.price}',
                   style: GoogleFonts.jetBrainsMono(
-                    color: Colors.blueGrey,
+                    //color: Colors.blueGrey,
                     fontSize: 16,
                   ),
                 ),

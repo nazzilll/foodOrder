@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_eatit_new/model/change_theme_button_widget.dart';
 import 'package:flutter_eatit_new/screens/category.dart';
 import 'package:flutter_eatit_new/screens/profile.dart';
 import 'package:flutter_eatit_new/screens/restaurant_home.dart';
@@ -44,5 +45,11 @@ class MenuViewModelImp implements MenuViewModel {
   @override
   void navigateProfile({FirebaseApp? app, User? user}) {
     Get.to(() => Profile(app: app!, user: user!));
+  }
+  @override
+  void changeTheme({FirebaseApp? app, User? user}) {
+
+    ChangeThemeButtonWidget();
+
   }
 }
