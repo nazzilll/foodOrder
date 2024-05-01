@@ -15,7 +15,7 @@ class CartStateController extends GetxController {
   getCart(String restaurantId) =>
       cart.where((item) => item.restaurantId == restaurantId);
 
-  addToCart(FoodModel foodModel, String restaurantId,
+  Future<void> addToCart(FoodModel foodModel, String restaurantId,
       {int quantity = 1}) async {
     try {
       var cartItem = CartModel(
