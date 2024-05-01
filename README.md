@@ -32,13 +32,73 @@ Dalam contoh-contoh di atas, asynchronous programming digunakan dengan menggunak
 ### Dark Mode
 ![image](https://github.com/nazzilll/foodOrder/assets/153486062/8ad9c8d1-d232-4e74-b12a-8f0f329d976c)
 
+Package Provider digunakan untuk mengatur tema terang/gelap dalam aplikasi dengan cara sebagai berikut. Pertama, saat aplikasi dimulai, ChangeNotifierProvider membuat ThemeProvider yang mengontrol tema aplikasi. Kemudian, dengan bantuan GetStorage, tema terakhir yang dipilih oleh pengguna dibaca. Jika tidak ada tema yang dipilih sebelumnya, maka tema default yang dipilih adalah tema terang. Saat MyApp dibangun, tema aplikasi diatur berdasarkan tema terakhir yang dipilih oleh pengguna. MaterialApp menggunakan properti themeMode dari ThemeProvider untuk mengatur tema aplikasi. Ketika pengguna mengubah tema, toggleTheme() dipanggil dari ThemeProvider, yang mengubah tema aplikasi dan menyimpan preferensi tema baru menggunakan GetStorage. Selanjutnya, notifyListeners() merubah semua widget sesuai tema yang dipilih. Dengan demikian, aplikasi dapat mengatur tema terang/gelap secara dinamis sesuai dengan preferensi pengguna.
+
 ## Bookmark/Favourite:
 Karena tema aplikasi kami adalah pemesanan, maka kami menerapkan pada keranjang/cart. Kami menggunakan dependencies GetStorage.
-![image](https://github.com/nazzilll/foodOrder/assets/153486062/7b887f2a-d13c-417d-b2c4-aca646dd362d)
+// cart_state.dart
 
-Pada bagian badgeContent, kita menggunakan fungsi cartStateController.getQuantity(mainStateController.selectedRestaurant.value.restaurantId) untuk mendapatkan jumlah item di keranjang dari CartStateController. Jumlah ini kemudian ditampilkan di atas ikon keranjang belanja sebagai badge.
+import 'dart:convert';
 
-Ketika aplikasi ditutup dan dibuka kembali, nilai di badge akan tetap konsisten dengan jumlah item di keranjang yang disimpan dalam GetStorage, karena nilai tersebut dipulihkan saat aplikasi dibuka kembali.
+import 'package:flutter_eatit_new/model/cart_model.dart';
+import 'package:flutter_eatit_new/model/food_model.dart';
+import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+
+import '../strings/cart_string.dart';
+import '../utils/const.dart';
+
+class CartStateController extends GetxController {
+  var cart = List<CartModel>.empty(growable: true).obs;
+  final box = GetStorage();
+
+  // ...
+
+  Future<void> addToCart(FoodModel foodModel, String restaurantId,
+      {int quantity = 1}) async {
+    try {
+      // Buat objek CartModel dari FoodModel
+      var cartItem = CartModel(
+        id: foodModel.id,
+        name: foodModel.name,
+        description: foodModel.description,
+        image: foodModel.image,
+        price: foodModel.price,
+        addon: foodModel.addon,
+        size: foodModel.size,
+        quantity: quantity,
+        restaurantId: restaurantId,
+      );
+      if (isExists(cartItem, restaurantId)) {
+        // Jika item sudah ada dalam keranjang, update jumlahnya
+        var foodNeedToUpdate =
+            cart.firstWhere((element) => element.id == cartItem.id);
+        foodNeedToUpdate.quantity += quantity;
+      } else {
+        // Jika item belum ada dalam keranjang, tambahkan ke keranjang
+        cart.add(cartItem);
+      }
+      // Encode cart menjadi JSON
+      var jsonDBEncode = jsonEncode(cart);
+      // Simpan ke Get Storage
+      await box.write(MY_CART_KEY, jsonDBEncode);
+      cart.refresh(); // Refresh keranjang
+      Get.snackbar(successTitle, successMessage); // Tampilkan snackbar
+    } catch (e) {
+      Get.snackbar(errorTitle, e.toString());
+    }
+  }
+
+  // ...
+
+  bool isExists(CartModel cartItem, String restaurantId) =>
+      cart.any((e) => e.id == cartItem.id && e.restaurantId == restaurantId);
+
+  // ...
+}
+
+Dalam kode di atas, saat pengguna menambahkan item ke keranjang, fungsi addToCart akan dijalankan. Objek CartModel dibuat berdasarkan FoodModel, kemudian dicek apakah item sudah ada dalam keranjang atau belum. Jika sudah ada, jumlahnya akan diupdate; jika belum, item akan ditambahkan ke keranjang. Setelah itu, keranjang diencode menjadi JSON dan disimpan ke Get Storage.
+
 
 ## Screen
 ![image](https://github.com/nazzilll/foodOrder/assets/153486062/e6bfbe90-fbe0-42f9-b09b-c2a09fdb7e2c)
