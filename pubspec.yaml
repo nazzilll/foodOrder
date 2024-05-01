@@ -53,6 +53,7 @@ dependencies:
   http: ^1.1.0
   flutter_color_utils: any
   provider: ^6.1.2
+  shared_preferences: ^2.2.3
 
 
 

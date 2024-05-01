@@ -51,7 +51,7 @@ class MyApp extends StatelessWidget {
       create: (context) => ThemeProvider(),
       builder: (context, _) {
         final themeProvider = Provider.of<ThemeProvider>(context);
-        return GetMaterialApp(
+        return MaterialApp(
           title: "",
           themeMode: themeProvider.themeMode,
           theme: MyThemes.lightTheme,

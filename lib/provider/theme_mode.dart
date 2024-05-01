@@ -1,26 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:get_storage/get_storage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ThemeProvider extends ChangeNotifier {
   ThemeMode themeMode = ThemeMode.system;
-  final box = GetStorage();
+  late SharedPreferences _prefs;
 
   ThemeProvider() {
-    themeMode = _loadTheme();
+    _loadTheme();
   }
 
-  ThemeMode _loadTheme() {
-    final savedTheme = box.read('theme');
+  _loadTheme() async {
+    _prefs = await SharedPreferences.getInstance();
+    final savedTheme = _prefs.getString('theme');
     if (savedTheme == 'dark') {
-      return ThemeMode.dark;
+      themeMode = ThemeMode.dark;
     } else {
-      return ThemeMode.light;
+      themeMode = ThemeMode.light;
     }
+    notifyListeners();
   }
+
   bool get isDarkMode {
     if (themeMode == ThemeMode.system) {
-      final brightness = SchedulerBinding.instance.window.platformBrightness;
+      final brightness = SchedulerBinding.instance!.window.platformBrightness;
       return brightness == Brightness.dark;
     } else {
       return themeMode == ThemeMode.dark;
@@ -29,10 +32,11 @@ class ThemeProvider extends ChangeNotifier {
 
   void toggleTheme(bool isOn) {
     themeMode = isOn ? ThemeMode.dark : ThemeMode.light;
-    box.write('theme', isOn ? 'dark' : 'light');
+    _prefs.setString('theme', isOn ? 'dark' : 'light');
     notifyListeners();
   }
 }
+
 
 class MyThemes {
   static final darkTheme = ThemeData(
