@@ -30,16 +30,21 @@ Future<void> main() async {
   FirebaseApp app = await Firebase.initializeApp();
   await GetStorage.init();
   final User? user = FirebaseAuth.instance.currentUser;
-  runApp(MyApp(app: app, user: user));
+  final box = GetStorage();
+  final theme = box.read('theme') ?? 'light';
+  runApp(MyApp(app: app, user: user,theme: theme));
 
 }
 
 class MyApp extends StatelessWidget {
   final FirebaseApp app;
   final User? user;
+  final String theme;
+
+  MyApp({required this.app, this.user, required this.theme});
 
 
-  MyApp({required this.app, this.user});
+
 
   @override
   Widget build(BuildContext context) => ChangeNotifierProvider(
