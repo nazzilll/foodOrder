@@ -32,7 +32,21 @@ Dalam contoh-contoh di atas, asynchronous programming digunakan dengan menggunak
 ### Dark Mode
 ![image](https://github.com/nazzilll/foodOrder/assets/153486062/8ad9c8d1-d232-4e74-b12a-8f0f329d976c)
 
-Package Provider digunakan untuk mengatur tema terang/gelap dalam aplikasi dengan cara sebagai berikut. Pertama, saat aplikasi dimulai, ChangeNotifierProvider membuat ThemeProvider yang mengontrol tema aplikasi. Kemudian, dengan bantuan GetStorage, tema terakhir yang dipilih oleh pengguna dibaca. Jika tidak ada tema yang dipilih sebelumnya, maka tema default yang dipilih adalah tema terang. Saat MyApp dibangun, tema aplikasi diatur berdasarkan tema terakhir yang dipilih oleh pengguna. MaterialApp menggunakan properti themeMode dari ThemeProvider untuk mengatur tema aplikasi. Ketika pengguna mengubah tema, toggleTheme() dipanggil dari ThemeProvider, yang mengubah tema aplikasi dan menyimpan preferensi tema baru menggunakan GetStorage. Selanjutnya, notifyListeners() merubah semua widget sesuai tema yang dipilih. Dengan demikian, aplikasi dapat mengatur tema terang/gelap secara dinamis sesuai dengan preferensi pengguna.
+Dengan menggunakan SharedPreferences untuk menyimpan tema, skema tema yang tersimpan akan disesuaikan dengan kode yang Anda telah berikan. Berikut adalah penjelasan tentang bagaimana skema tema disimpan dan diterapkan saat aplikasi ditutup dan dibuka kembali:
+
+1. Penyimpanan Tema:
+- Saat aplikasi dimulai, kelas ThemeProvider akan memuat tema yang tersimpan dari SharedPreferences melalui metode _loadTheme().
+- Jika tidak ada tema yang tersimpan sebelumnya, maka tema default yang akan digunakan adalah tema light.
+- Jika ada tema yang tersimpan dan memiliki nilai 'dark', maka tema gelap akan diterapkan. Jika nilainya 'light' atau nilai yang tidak valid, maka tema terang akan diterapkan.
+- Metode _loadTheme() dipanggil dalam konstruktor ThemeProvider untuk memastikan tema yang tepat diterapkan saat aplikasi dimulai.
+2. Pengubahan Tema:
+- Ketika pengguna mengubah tema melalui tombol yang disediakan oleh ChangeThemeButtonWidget, tema yang dipilih akan disimpan dalam SharedPreferences dengan metode toggleTheme(bool isOn).
+- Metode ini mengubah themeMode sesuai dengan pilihan pengguna dan menyimpan nilai tema yang dipilih (gelap atau terang) ke SharedPreferences.
+3. Penerapan Tema:
+- Tema yang dipilih akan diterapkan dalam kelas MyApp di dalam widget MaterialApp.
+- Pada saat membangun MaterialApp, ThemeProvider disediakan ke ChangeNotifierProvider agar bisa diakses oleh seluruh widget dalam pohon widget.
+- ThemeProvider digunakan untuk menentukan themeMode yang akan diterapkan pada MaterialApp, yang kemudian akan menentukan tema yang akan digunakan (light atau dark) berdasarkan pilihan pengguna atau tema yang disimpan sebelumnya.
+Dengan cara ini, skema tema yang dipilih akan disimpan menggunakan SharedPreferences, sehingga tema yang dipilih akan diingat dan diterapkan kembali saat pengguna menutup dan membuka kembali aplikasi.
 
 ## Bookmark/Favourite:
 Karena tema aplikasi kami adalah pemesanan, maka kami menerapkan pada keranjang/cart. Kami menggunakan dependencies GetStorage.
